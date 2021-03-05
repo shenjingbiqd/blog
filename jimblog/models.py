@@ -6,7 +6,6 @@ from taggit.managers import TaggableManager
 from PIL import Image
 
 
-
 # Create your models here.
 class ArticleColumn(models.Model):
     title = models.CharField(max_length=100, blank=True)
