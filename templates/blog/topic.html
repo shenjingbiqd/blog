@@ -1,0 +1,8 @@
+{% extends "blog/base.html" %}
+{% block detail %}
+<div class="col-9">
+    {% for column in columns %}
+    <a class="breadcrumb" href="{% url 'jimblog:all' %}?search=&column={{ column.id }}&topic=" style="background-color: white; font-size: xx-large; font-family: 'Microsoft Sans Serif', Tahoma, Arial, Verdana, Sans-Serif; color: #75715e">{{ column.title }}</a>
+    {% endfor %}
+</div>
+{% endblock %}

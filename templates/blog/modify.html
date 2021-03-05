@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+{% block detail %}
+    <div class="col-sm-12 col-lg-8">
+    <form method="post" action=".">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">文章标题</label>
+            <input class="form-control" type="text" name="title" id="title" value="{{ post.title }}">
+        </div>
+        <div class="form-group">
+            <label for="body">文章正文</label>
+            <textarea class="form-control" type="text" name="body" id="body" rows="12">{{ post.body }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="topic">标签</label>
+            <input class="form-control" type="text" name="topic" id="topic" value="{% for tag in post.topic.all %}{{ tag }},{% endfor %}">
+        </div>
+        <div class="form-group">
+            <label for="topic">栏目</label>
+            <select class="form-control" id="column" name="column">
+                <option value="none">请选择栏目</option>
+                {% for column in columns %}
+                <option value="{{ column.id }}">{{ column }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+    </form>
+    </div>
+{% endblock %}

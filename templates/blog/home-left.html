@@ -1,0 +1,30 @@
+<div class="col-lg-3 col-xs-0">
+<div class="calendar-1">
+    <div class="title">
+        <a href="" id="prev" class="float-lg-left" style="font-size: xxx-large; color: deepskyblue"><</a>
+        <a href="" id="next" class="float-lg-right" style="font-size: xxx-large; color: deepskyblue">></a>
+        <h3 class="calendar-title" id="calendar-title">Month</h3>
+        <h4 class="calendar-title-sub" id="calendar-year">Year</h4>
+        <hr>
+    </div>
+    <div class="body">
+        <div class="lightgray body-list">
+            <ul>
+                <li>MON</li>
+                <li>TUE</li>
+                <li>WED</li>
+                <li>THU</li>
+                <li>FRI</li>
+                <li>SAT</li>
+                <li>SUN</li>
+            </ul>
+        </div>
+        <div class="darkgray body-list">
+            <ul id="days">
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+{% load static %}
+<script src="{% static 'script/calendar.js' %}"></script>
