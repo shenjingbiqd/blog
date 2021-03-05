@@ -1,0 +1,103 @@
+{% extends 'blog/base.html' %}
+{% block detail %}
+
+    <div class="col-9">
+    <h1 style="display: inline">{{ post.title }}</h1>
+
+        {% if post.author.id == user.id %}
+        <h4 style="display: inline;padding: 30px"><a class="h6" style="color: gray" href="{% url 'jimblog:modify' post.id %}">修改文章</a></h4>
+            <h4 style="display: inline;padding: 30px"><a class="h6" style="color: gray" href="#" onclick="confirm_delete()">删除文章</a></h4>
+        {% endif %}
+
+    <hr>
+        {% if post.column %}
+            <button type='button' class="btn btn-sm mb-2
+            {% if post.column.id == 1 %}
+            btn-primary
+            {% elif post.column.id == 2 %}
+            btn-seceondary
+            {% endif %}">
+                {{ post.column }}
+            </button>
+        {% endif %}
+    <span>
+        {% for tag in post.topic.all %}
+        <a href="#" class="badge-secondary">{{ tag }}</a>
+    {% endfor %}
+    </span>
+    <p class="text-left">{{ post.body | safe }}</p>
+    <p class="small text-right text-muted">Posted by {{ post.author }} {{ post.updated }} Views: {{ post.total_views }}</p>
+
+    <hr>
+    {% if user.is_authenticated %}
+    <form
+        action="{% url 'comment:post_comment' post.id %}"
+        method="post"
+        >
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="body">
+                <strong>
+                    我也要发言：
+                </strong>
+            </label>
+            <div>
+                {{ comment_form.media }}
+                {{ comment_form.body }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">发送</button>
+    </form>
+
+    <br>
+    {% else %}
+    <br>
+    <h5 class="row justify-content-center">
+    请<a href="{% url 'userprofile:login' %}">登录</a>
+    </h5>
+    <br>
+    {% endif %}
+
+    <!-- 显示评论 -->
+    <h4>共有{{ comments.count }}条评论</h4>
+
+    {% for comment in comments %}
+    <hr>
+    <p>
+        <strong style="color: pink">
+            {{ comment.user }}
+        </strong>于
+        <span style="color: green">
+            {{ comment.created|date:"Y-m-d H:i:s" }}
+        </span>时说：
+    </p>
+    <pre style="font-family: inherit; font-size: 1em">
+        {{ comment.body | safe }}
+    </pre>
+    {% endfor %}
+    <form
+            method="post"
+            style="display: none"
+            action="{% url 'jimblog:delete' post.id %}"
+            id="delete"
+    >
+        {% csrf_token %}
+        <button type="submit"></button>
+    </form>
+    </div>
+    <script>
+    function confirm_delete(){
+        layer.open({
+          title: '确认删除',
+            content: '确认删除这篇文章吗',
+            yes:function (index){
+              $('form#delete button').click()
+                layer.close()
+            }
+        })
+    }
+    </script>
+    <script>
+        $(".django-ckeditor-widget").removeAttr('style');
+    </script>
+{% endblock %}

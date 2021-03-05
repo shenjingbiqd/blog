@@ -1,0 +1,72 @@
+{% extends "blog/base.html" %}
+{% block detail %}
+    <div class="col-9">
+    <h6 style="display: inline"><a href="{% url 'jimblog:all' %}?order=total_views&search={{ search }}&column={{ column }}&topic={{ topic }}" style="color: gray">最热 /</a></h6><h6 style="display: inline; color: gray;margin-left: 10px"><a href="{% url 'jimblog:all' %}?search={{ search }}&column={{ column }}&topic={{ topic }}" style="color: gray">最新</a></h6>
+        {% for post in posts %}
+            <div class="row">
+            {% if post.avatar %}
+            <div class="col-3">
+            <img src="{{ post.avatar.url }}"
+                 alt="avatar"
+                 style="max-width: 100%; border-radius: 20px">
+            </div>
+                <div class="col-9">
+            {% else %}
+                <div class="col-9 offset-3">
+                {% endif %}
+        {% if post.column %}
+            <button type='button' class="btn btn-sm mb-2
+            {% if post.column.id == 1 %}
+            btn-primary
+            {% elif post.column.id == 2 %}
+            btn-seceondary
+            {% endif %}">
+            <a href="{% url 'jimblog:all' %}?search={{ search }}&column={{ post.column.id }}&topic={{ tag }}" style="color: white">{{ post.column }}</a>
+            </button>
+        {% endif %}
+            <span>
+        {% for tag in post.topic.all %}
+        <a href="{% url 'jimblog:all' %}?search={{ search }}&column={{ post.column.id }}&topic={{ tag }}" class="badge-secondary">{{ tag }}</a>
+    {% endfor %}
+    </span>
+        <h1><a href="{% url 'jimblog:detail' post.id %}" style="color: black">{{ post.title }}</a></h1>
+            <hr>
+        <p>{{ post.body | truncatechars:50 }}</p>
+            <p class="small text-right text-muted"><i class="fa fa-pencil" style="color: green"></i> {{ post.author }} <i class="fa fa-clock-o" style="color: cornflowerblue"></i>{{ post.updated.date }} <i class="fa fa-eye" style="color: mediumpurple"></i> {{ post.total_views }}</p>
+            <hr>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="pagination">
+            <div class="m-auto">
+        <span class="page-link">
+            {% if posts.has_previous %}
+                <a href="?page=1&order={{ order }}&search={{ search }}&column={{ column }}&topic={{ topic }}" class="btn btn-light">
+                &laquo; 1
+                </a>
+                <span>...</span>
+                <a href="?page={{ posts.previous_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&topic={{ topic }}" class="btn btn-light">
+                {{ posts.previous_page_number }}
+                </a>
+            {% endif %}
+            <span class="current-app btn btn-dark btn-lg">
+            {{ posts.number }}
+        </span>
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&topic={{ topic }}" class="btn btn-light">
+            {{ posts.next_page_number }}
+            </a>
+                <span>...</span>
+                <a href="?page={{ posts.paginator.num_pages }}&order={{ order }}&search={{ search }}&column={{ column }}&topic={{ topic }}" class="btn btn-light">
+            {{ posts.paginator.num_pages}} &raquo;
+            </a>
+            {% endif %}
+        </span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}

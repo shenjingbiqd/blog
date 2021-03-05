@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+{% block detail %}
+    <div class="col-8">
+<form method="post" action=".">
+{% csrf_token %}
+    <hr>
+<div class="form-group form-inline">
+    <label for="username" style="width: 90px; padding-right: 10px">用户名</label>
+    <input class="form-control" id="username" name="username" type="text" required>
+</div>
+    <div class="form-group form-inline">
+        <label for="email" style="width: 90px; padding-right: 10px">邮箱</label>
+        <input class="form-control" id="email" name="email" type="text">
+    </div>
+    <div class="form-group form-inline">
+        <label for="password" style="width: 90px; padding-right: 10px">密码</label>
+        <input class="form-control" id="password" name="password" type="password" required>
+    </div>
+    <div class="form-group form-inline">
+        <label for="password2" style="width: 90px; padding-right: 10px">确认密码</label>
+        <input class="form-control" id="password2" name="password2" type="password" required>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-secondary" style="margin-left: 90px">提交</button>
+        <button type="reset" class="btn btn-secondary" style="margin-left: 90px">取消</button>
+    </div>
+</form>
+    </div>
+{% endblock %}

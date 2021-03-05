@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
+    <link rel="stylesheet" href="{% static 'calendar_css/calendar.css' %}">
+    <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/layer/3.1.1/layer.js"></script>
+    <title>Jim Home</title>
+    <style>
+        #header
+
+        {
+            background-image: url("{% static 'image/home1.jpg' %}");
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    {% include "blog/header.html" %}
+    <div class="row">
+        <div id="header" class="col-12">
+            <h1 class="display-5 font-weight-bold text-center text-muted">吉 姆 的 小 屋</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% include "blog/home-left.html" %}
+        {% block detail %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+{% block detail %}
+    <div class="col-xs-12 col-lg-8">
+        {% for post in posts %}
+        <h1><a href="{% url 'jimblog:detail' post.id %}" style="color: black">{{ post.title }}</a></h1>
+            <hr>
+        <p>{{ post.body | truncatechars:50 }}</p>
+            <p class="small text-right text-muted"><i class="fa fa-pencil" style="color: green"></i> {{ post.author }} <i class="fa fa-clock-o" style="color: cornflowerblue"></i> {{ post.updated.date }} <i class="fa fa-eye" style="color: mediumpurple"></i> {{ post.total_views }}</p>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}
