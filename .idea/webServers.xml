@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="23972e86-62aa-483d-9e8b-5f35ab52efff" name="ucloud" url="http://117.50.100.93:8198">
+        <fileTransfer rootFolder="/python/web/blog" accessType="SFTP" host="117.50.100.93" port="22" sshConfigId="71d9603f-0c02-4931-b19f-cb94fc76a4f5" sshConfig="jim@117.50.100.93:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
