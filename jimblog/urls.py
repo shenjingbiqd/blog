@@ -19,7 +19,7 @@ from jimblog.views import show_article, show_article_all, article_create, articl
 
 
 urlpatterns = [
-    path('home/', show_article, name="home"),
+    path('', show_article, name="home"),
     path('all/', show_article_all, name="all"),
     path('articlecreate/', article_create, name="article_create"),
     path('article/<int:id>', article_detail, name="detail"),
