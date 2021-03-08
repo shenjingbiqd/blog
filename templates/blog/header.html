@@ -35,9 +35,11 @@
                         <button type="submit"></button>
                     </form>
             </li>
+                {% if user.id == 1 %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'jimblog:article_create' %}"><i class="fa fa-plus-square-o fa-lg" style="color: gray"></i></a>
                 </li>
+                    {% endif %}
                     {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'userprofile:login' %}"><i class="fa fa-address-book-o fa-lg" style="color: gray"></i></a>

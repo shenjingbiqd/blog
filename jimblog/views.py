@@ -50,24 +50,28 @@ def show_article_all(request):
     return render(request, "blog/all.html", {'posts': posts, 'order': order, 'search': search, 'column': column, 'topic': tag})
 
 
+@login_required(login_url='/user/login/')
 def article_create(request):
-    if request.method == "POST":
-        article_post_form = ArticlePostForm(request.POST, request.FILES)
-        if article_post_form.is_valid():
-            new_article = article_post_form.save(commit=False)
-            new_article.author = User.objects.get(id=request.user.id)
-            if request.POST['column'] != 'none':
-                new_article.column = ArticleColumn.objects.get(id=request.POST['column'])
-            new_article.save()
-            article_post_form.save_m2m()
-            return redirect("jimblog:home")
+    if request.user.id == 1:
+        if request.method == "POST":
+            article_post_form = ArticlePostForm(request.POST, request.FILES)
+            if article_post_form.is_valid():
+                new_article = article_post_form.save(commit=False)
+                new_article.author = User.objects.get(id=request.user.id)
+                if request.POST['column'] != 'none':
+                    new_article.column = ArticleColumn.objects.get(id=request.POST['column'])
+                new_article.save()
+                article_post_form.save_m2m()
+                return redirect("jimblog:home")
+            else:
+                return HttpResponse("表单内容有误，请重新填写。")
         else:
-            return HttpResponse("表单内容有误，请重新填写。")
+            columns = ArticleColumn.objects.all()
+            article_post_form = ArticlePostForm()
+            context = {'article_post_form': article_post_form, 'columns': columns}
+            return render(request, 'blog/article_create.html', context)
     else:
-        columns = ArticleColumn.objects.all()
-        article_post_form = ArticlePostForm()
-        context = {'article_post_form': article_post_form, 'columns': columns}
-        return render(request, 'blog/article_create.html', context)
+        return HttpResponse('请使用授权用户发表文章')
 
 
 def article_detail(request, id):
