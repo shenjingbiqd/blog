@@ -81,10 +81,9 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
-        'HOST': '127.0.0.1',
-        'USER': 'jim',
-        'PASSWORD': '5303113_a',
+        'OPTIONS': {
+            'read_default_file': '/sites/my.cnf',
+        }
     }
 }
 
