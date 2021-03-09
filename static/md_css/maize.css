@@ -185,7 +185,7 @@
 #write code{
   font-size: 14px;
   color:  rgb(235, 76, 55);
-  background-color: #f0f0f0;
+  /*background-color: #f0f0f0;*/
 }
 
 /* 行内代码 */
@@ -256,7 +256,6 @@
 #write .md-def-name:after {
   color: #000;
 }
-
 
 /* 代码块主题 */
 code, .md-fences {
@@ -349,6 +348,7 @@ code, .md-fences {
   color: rgba(255, 255, 255, 1);
   background-color: #e9405c;
 }
+
 
 /*流程图样式*/
 pre[lang='sequence'],
