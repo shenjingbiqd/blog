@@ -16,7 +16,7 @@
             {% if post.column.id == 1 %}
             btn-primary
             {% elif post.column.id == 2 %}
-            btn-seceondary
+            btn-secondary
             {% endif %}">
                 {{ post.column }}
             </button>
@@ -86,18 +86,6 @@
         <button type="submit"></button>
     </form>
     </div>
-    <script>
-    function confirm_delete(){
-        layer.open({
-          title: '确认删除',
-            content: '确认删除这篇文章吗',
-            yes:function (index){
-              $('form#delete button').click()
-                layer.close()
-            }
-        })
-    }
-    </script>
     <script>
         $(".django-ckeditor-widget").removeAttr('style');
     </script>
