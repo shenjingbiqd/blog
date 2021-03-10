@@ -19,7 +19,7 @@
             {% if post.column.id == 1 %}
             btn-primary
             {% elif post.column.id == 2 %}
-            btn-seceondary
+            btn-secondary
             {% endif %}">
             <a href="{% url 'jimblog:all' %}?search={{ search }}&column={{ post.column.id }}&topic={{ tag }}" style="color: white">{{ post.column }}</a>
             </button>
