@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load djangomarkdown %}
 {% block detail %}
 
     <div class="col-9">
@@ -25,7 +26,7 @@
         <a href="#" class="badge-secondary">{{ tag }}</a>
     {% endfor %}
     </span>
-    <div class="text-left" id="write">{{ post.body | safe }}</div>
+    <div class="text-left" id="write">{{ post.body | djangomarkdown }}</div>
     <p class="small text-right text-muted">Posted by {{ post.author }} {{ post.updated }} Views: {{ post.total_views }}</p>
 
     <hr>

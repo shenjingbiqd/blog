@@ -3,7 +3,7 @@ from .models import Article, ArticleColumn
 from .forms import ArticlePostForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-import markdown
+#import markdown, markdown2
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -76,10 +76,10 @@ def article_create(request):
 
 def article_detail(request, id):
     post = Article.objects.get(id=id)
-    post.body = markdown.markdown(post.body, extensions=[
-        'markdown.extensions.extra',
-        'markdown.extensions.codehilite',
-    ])
+    #post.body = markdown.markdown(post.body, extensions=[
+    #    'markdown.extensions.extra',
+    #    'markdown.extensions.codehilite',
+    #])
     post.total_views += 1
     post.save(update_fields=['total_views'])
     comments = Comment.objects.filter(article=id)
